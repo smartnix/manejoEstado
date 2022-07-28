@@ -1,12 +1,13 @@
-import { UseState } from "./components/UseState";
+import { UseReducer } from "./Reducer/UseReducer";
 import { ClassState } from "./components/ClassState";
+import { UseState } from "./components/UseState";
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <UseState name="UseState"/>
-      <ClassState name = "ClassState"/>
+      <UseReducer name = "Class Reducer"/>
     </div>
   );
 }
