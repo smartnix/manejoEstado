@@ -8,7 +8,7 @@ function UseState({name})
         value:'',
         error:false,
         loading:false,
-        delete:false,
+        deleted:false,
         confirmed:false
     });
     //-------------------------------------------------------------------
