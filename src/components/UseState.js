@@ -4,30 +4,32 @@ const SECURITY_CODE = 'paradigma';
 
 function UseState({name}) 
 {
-    const [value, setValue] = useState('');
-    const [error, setError] = useState(false);
-    const [loading, setLoading] = useState(false);
-    console.log(value);
+    const [state, setState] = useState({
+        value:'',
+        error:false,
+        loading:false
+    });
+
     useEffect(() => {
      
-        if(!!loading)
+        if(!!state.loading)
         {
-           
             setTimeout(() => {
 
-                if(value !== SECURITY_CODE)
+                if(state.value !== SECURITY_CODE)
                 {
-                    setError(true);
+                    setState({...state,error:true, loading:false})
                 }
-                setLoading(false);
-                
+                else
+                {
+                    setState({...state,loading:false,error:false})
+                }
                 }, 2000);
         }
-    }, [loading])
+    }, [state.loading])
 
     const onChangeHandler = event => {
-        setValue(event.target.value);
-        
+        setState({...state,value:event.target.value})
      };
     
     return (
@@ -36,25 +38,25 @@ function UseState({name})
             <p>Por favor, escribe el codigo de seguridad</p>
 
             {
-                (error && !loading) && 
+                (state.error && !state.loading) && 
                 (
                     <p>Error: el codigo es incorrecto</p>
                 )
             }
 
             {   
-                loading  &&
+                state.loading  &&
                 (
                     <p>Cargando...</p>
                 )
             }
 
             <input placeholder="Código de seguridad" 
-                value={value} 
+                value={state.value} 
                 onChange={onChangeHandler}
             />
             <button
-                onClick={() => setLoading(true) }  
+                onClick={() =>  setState({...state,loading:true}) }  
             >Comprobar</button>
         </div>
     );
